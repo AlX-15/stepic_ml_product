@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Весы | Распознавание продуктов</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <header class="app-header">
+            <div class="global-padding">
+                <div class="container app-container">
+                    <div class="text_logo">Singularity<span class="logo-cursor">_</span></div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-wrapper">
+            <section class="section_app">
+                <div class="global-padding section-padding">
+                    <div class="container app-container">
+                        <div class="main_heading_wrapper app-heading">
+                            <div class="text-chapter"><span class="opacity-50">//</span> // ФИНАЛЬНЫЙ ПРОЕКТ</div>
+                            <h1 class="h1"><span class="text-color-blue">AI-Весы</span></h1>
+                            <p class="opacity-50-hero app-subtitle">Загрузите фото продукта — ИИ определит, что это</p>
+                            <div class="app-badges">
+                                <span class="plug text-color-green">EfficientNet</span>
+                                <span class="plug text-color-blue">FastAPI</span>
+                                <span class="plug text-color-yellow">PyTorch</span>
+                            </div>
+                        </div>
+
+                        <div class="app-panel">
+                            <!-- 🔶 TODO H1: добавить id="upload-area" -->
+                            <div class="upload-area">
+                                <div id="placeholder">
+                                    <span class="upload-icon">📸</span>
+                                    <div class="upload-text">Перетащите фото сюда или нажмите</div>
+                                    <div class="upload-hint opacity-50">JPG, PNG — фрукт, овощ или другой продукт</div>
+                                </div>
+                                <!-- 🔶 TODO H2: добавить id="preview-img" -->
+                                <img alt="Превью" style="display:none;">
+                                <!-- 🔶 TODO H3: добавить id="file-input" -->
+                                <input type="file" accept="image/*">
+                            </div>
+
+                            <!-- 🔶 TODO H4: добавить id="btn" -->
+                            <button class="btn predict-btn" disabled type="button">
+                                <div class="btn_relative_wrapper">
+                                    <div class="primary_button_text">Распознать продукт</div>
+                                </div>
+                                <div class="btn_relative_wrapper">
+                                    <div class="primary_button_icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <path
+                                                d="M12.083 20.417H7.91602V16.25H12.083V20.417ZM16.25 7.91699H20.416V12.083H16.25V16.25H12.083V12.083H-0.416992V7.91699H12.083V3.75H16.25V7.91699ZM12.083 3.75H7.91602V-0.416992H12.083V3.75Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <!-- 🔶 TODO H5: добавить id="result" -->
+                            <div class="result-box">
+                                <div class="result-placeholder opacity-50">
+                                    Результат появится здесь после распознавания
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="section_footer app-footer">
+            <div class="global-padding">
+                <div class="container app-container">
+                    <div class="footer_bottom_content app-footer-content">
+                        <div class="text_logo app-footer-logo">Singularity<span class="logo-cursor">_</span></div>
+                        <p class="opacity-50 app-footer-text">Создано на уроке ML · Финальный проект «Сингулярность»</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
