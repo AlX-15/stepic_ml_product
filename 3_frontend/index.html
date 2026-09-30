@@ -40,20 +40,20 @@
 
                         <div class="app-panel">
                             <!-- 🔶 TODO H1: добавить id="upload-area" -->
-                            <div class="upload-area">
+                            <div class="upload-area" id="upload-area">
                                 <div id="placeholder">
                                     <span class="upload-icon">📸</span>
                                     <div class="upload-text">Перетащите фото сюда или нажмите</div>
                                     <div class="upload-hint opacity-50">JPG, PNG — фрукт, овощ или другой продукт</div>
                                 </div>
                                 <!-- 🔶 TODO H2: добавить id="preview-img" -->
-                                <img alt="Превью" style="display:none;">
+                                <img alt="Превью" style="display:none;" id="preview-img">
                                 <!-- 🔶 TODO H3: добавить id="file-input" -->
-                                <input type="file" accept="image/*">
+                                <input type="file" accept="image/*" id="file-input">
                             </div>
 
                             <!-- 🔶 TODO H4: добавить id="btn" -->
-                            <button class="btn predict-btn" disabled type="button">
+                            <button class="btn predict-btn" disabled type="button" id="btn">
                                 <div class="btn_relative_wrapper">
                                     <div class="primary_button_text">Распознать продукт</div>
                                 </div>
@@ -70,7 +70,7 @@
                             </button>
 
                             <!-- 🔶 TODO H5: добавить id="result" -->
-                            <div class="result-box">
+                            <div class="result-box" id="result">
                                 <div class="result-placeholder opacity-50">
                                     Результат появится здесь после распознавания
                                 </div>

@@ -37,11 +37,11 @@ async def recognize(file: UploadFile = File(...)):
 
     # TODO 1: Отправить файл в ML-сервис через requests.post
     # Подсказка: requests.post(url, files={"file": (имя, байты, тип)})
-    # response = 
+    response = requests.post(ml_url, files={"file": (file.filename, file_bytes, file.content_type)})
 
     # TODO 2: Распаковать ответ в словарь и вернуть его
-    # ai_answer = 
-    # return 
+    ai_answer = response.json()
+    return ai_answer
 
 
 if __name__ == "__main__":

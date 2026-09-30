@@ -12,11 +12,11 @@ const placeholder = document.getElementById('placeholder');
 
 // ═══ 🔶 TODO 1: кнопка btn ═══
 // TODO 1: Найди кнопку по id "btn" и сохрани в переменную btn
-// const btn = document...
+const btn = document.getElementById('btn');
 
 // ═══ 🔶 TODO 2: блок result ═══
 // TODO 2: Найди блок результата по id "result" и сохрани в переменную resultBox
-// const resultBox = document...
+const resultBox = document.getElementById('result')
 
 // Переменная для хранения выбранного файла
 let selectedFile = null;
@@ -79,27 +79,44 @@ btn.addEventListener('click', async () => {
     // Шаг 2: Упаковываем файл в FormData
     // ═══ 🔶 TODO 3: FormData ═══
     // TODO 3: Создай объект FormData и добавь в него файл
-    // const formData = new ...
-    // formData.append('file', selectedFile);
+    const formData = new formData();
+    formData.append('file', selectedFile);
 
     try {
         // Шаг 3: Отправляем fetch-запрос
         // ═══ 🔶 TODO 4: fetch POST ═══
         // TODO 4: POST на http://localhost:8000/api/recognize (method: 'POST', body: formData)
-        // const response = await fetch(...)
+        const response = await fetch('http://localhost:8000/api/recognize', {
+            method: 'POST',
+            body: formData
+        });
 
         // Шаг 4: Разбираем ответ
         // ═══ 🔶 TODO 5: response.json() ═══
         // TODO 5: Распакуй JSON (.json()) и возьми predictions
-        // const data = await response.json();
-        // const predictions = data.predictions;
+        const data = await response.json();
+        const predictions = data.predictions;
 
         // Шаг 5: Строим карточки результата
         // ═══ 🔶 TODO 6: карточки результата ═══
         // TODO 6: Цикл predictions.forEach — карточки с медалями и полосой уверенности
-        // let html = '';
-        // predictions.forEach((pred, index) => { ... });
-        // resultBox.innerHTML = html;
+        let html = '';
+        predictions.forEach((pred, index) => {
+            const emoji = index === 0 ? '🏆' : index === 1 ? '🥈' : '🥉';
+            html += `
+                <div class="prediction-card ${index === 0 ? 'top-prediction' : ''}">
+                    <span class="pred-emoji">${emoji}</span>
+                    <div class="pred-info">
+                        <div class="pred-name">${pred.name}</div>
+                        <div class="pred-bar-wrap">
+                            <div class="pred-bar" style="width: ${pred.confidence}%"></div>
+                        </div>
+                    </div>
+                    <span class="pred-confidence">${pred.confidence}%</span>
+                </div>
+            `;
+        });
+        resultBox.innerHTML = html;
 
     } catch (error) {
         resultBox.innerHTML = '<div class="error">❌ Ошибка! Убедись, что серверы запущены.</div>';

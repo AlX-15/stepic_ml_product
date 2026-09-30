@@ -25,12 +25,12 @@ print(f"   Загружено {num_classes} категорий продукто�
 print("🤖 Загружаю ИИ-модель распознавания продуктов...")
 
 # TODO 1: Создать модель EfficientNet-B0 и заменить последний слой
-# model = 
-# model.classifier[1] = 
+model = models.efficientnet_b0(weights=None)
+model.classifier[1] = torch.nn.Linear(model.classifier[1].in_features, num_classes)
 
 # TODO 2: Загрузить обученные веса из файла product_model.pth (использовать map_location="cpu") и перевести в eval
-# model.load_state_dict( ... )
-# model.eval()
+model.load_state_dict(torch.load("product_model.pth", map_location="cpu"))
+model.eval()
 
 # === 3. ПОДГОТОВКА ИЗОБРАЖЕНИЙ ===
 # Нейросеть ожидает картинку определённого размера и формата.
@@ -57,23 +57,23 @@ async def predict(file: UploadFile = File(...)):
     input_tensor = transform(image).unsqueeze(0)
 
     # TODO 3: Сделать предсказание моделью (без подсчёта градиентов!)
-    # with torch...
-    #     outputs = 
+    with torch.no_grad():
+        outputs = model(input_tensor)
 
     # TODO 4: Превратить «сырые» числа модели в вероятности (softmax)
-    # probabilities = 
+    probabilities = torch.nn.functional.softmax(outputs, dim=0)
 
     # TODO 5: Взять top-3 самых вероятных класса
-    # top3_prob, top3_idx = 
+    top3_prob, top3_idx = torch.topk(probabilities, 3)
 
     # TODO 6: Собрать результат в список словарей и вернуть
-    # results = []
-    # for i in range(3):
-    #     results.append({
-    #         "name": ...,
-    #         "confidence": ...
-    #     })
-    # return {"predictions": ...}# Запуск сервера
+    results = []
+    for i in range(3):
+        results.append({
+            "name": class_names[top3_idx[i].item()],
+            "confidence": round(top3_prob[i].item()*100, 1)
+        })
+    return {"predictions": results}# Запуск сервера
 if __name__ == "__main__":
     print("🚀 ML-сервис запущен на http://localhost:8001")
     print("📖 Документация: http://localhost:8001/docs")
